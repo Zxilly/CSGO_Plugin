@@ -1,0 +1,52 @@
+body{
+	background:#262626 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAMAAADz0U65AAAABlBMVEUkJCQgICC07A3IAAAAGElEQVQI12NgAAJGICCGZoDxGWDiDDB5AATIACGrnLAqAAAAAElFTkSuQmCC);
+	color:#EBEBE1;
+	font-family:"Segoe UI",Tahoma,Sans-serif;
+	margin:0}
+img{width:64px}
+a{
+	color:#EBEBE1;
+	font-weight:700;
+	outline:none;
+	text-decoration:none}
+a:hover{
+	color:#C5F458;
+	text-shadow:0 0 4px #C5F458}
+h2{
+	margin:0;
+	color:#EBEBE1;
+	position:absolute;
+	right:20px;
+	top:20px}
+h3{text-align:center}
+ul{list-style:none;
+	padding:0;
+	margin:auto;
+	width:100% !important;
+	overflow:hidden}
+section{background:rgba(18,18,18,.5);border:1px solid #111;border-radius:5px;padding:8px;width:1080px !important;margin:10px auto;}
+li{
+	float:left;
+	font-size:9px;
+	font-weight:700;
+	text-align:center;
+	text-shadow:1px 1px 1px #000;
+	position:relative;
+	background:rgba(50,50,48,.8) center no-repeat;
+	border:1px solid #363634;
+	border-radius:9px;
+	height:82px;
+	width:100px;
+	box-shadow:1px 1px 0px rgba(0,0,0,.16);
+	transition:background-color .15s ease-in-out,border .15s ease-in-out,box-shadow .15s ease-in-out;
+	margin:3px;
+	margin-bottom:42px}
+li:hover{
+	background-color:rgba(100,100,98,.8) !important;
+	border-color:#6E6E6C;
+	box-shadow:0 0 6px #6A6A68,0 0 20px #6A6A68 inset}
+li:hover > div{opacity:.1}
+li > a{display:block;width:120px;height:80px}
+li > div{position:absolute;bottom:3px;right:3px;color:#FFF;text-shadow:1px 1px 1px #000;opacity:.9;text-align:right}
+h6{margin:4px;font-size:18px}
+em{font-style:normal;margin-top:4px;display:block}
