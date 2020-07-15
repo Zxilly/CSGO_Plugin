@@ -39,185 +39,25 @@ weapon_url_dict = {
     41: "https://steamcdn-a.akamaihd.net/apps/730/icons/econ/weapons/base_weapons/weapon_knife.a07b900d79ea768eae1a217a2839c5727f760396.png",
 }
 
-
-def render(player, rankid):
-    template = """
-    <meta content="width=device-width,user-scalable=0" name="viewport">
-<style>html {
-    background: #2F3545;
-    color: #FFF;
-    font: 12px sans-serif;
-}
-
-body,
-h2,
-p {
-    margin: 0;
-}
-
-.csgo-stat-box {
-    overflow: hidden;
-}
-
-.csgo-stat-box .head {
-    padding: 10px;
-}
-
-.csgo-stat-box .head .user-link {
-    font-size: 24px;
-    line-height: 36px;
-}
-
-.csgo-stat-box .head .user-link img {
-    width: 36px;
-    height: 36px;
-    border-radius: 2px;
-    vertical-align: top;
-    margin-right: 10px;
-}
-
-.csgo-stat-box .head .level {
-    float: right;
-    height: 36px;
-}
-
-.csgo-stat-box .num-box {
-    margin: 0 -30px 0 0;
-    list-style-type: none;
-    padding: 5px 0 5px 5px;
-    overflow: hidden;
-    background: #111;
-    text-shadow: 0 1px 0 #000;
-}
-
-.csgo-stat-box .num-box li {
-    float: left;
-    padding: 5px 10px;
-    margin-right: 10px;
-}
-
-.csgo-stat-box .num-box li:last-child {
-    margin-right: 0;
-    padding-right: 0;
-}
-
-.csgo-stat-box .num-box li span {
-    display: block;
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 100;
-}
-
-.csgo-stat-box .num-box li b {
-    display: block;
-    font-style: 12px;
-    line-height: 18px;
-    font-weight: 200;
-    color: #8A9EA7;
-}
-
-.csgo-stat-box .last-round-box {
-    position: relative;
-    text-align: right;
-    padding: 10px 17px;
-}
-
-.csgo-stat-box .last-round-box h2 {
-    font-size: 12px;
-    line-height: 22px;
-    font-weight: 200;
-    color: #8A9EA7;
-    background: #111;
-    position: absolute;
-    top: 15px;
-    left: 50%;
-    padding: 0 7px;
-    border-radius: 2px;
-    margin-left: -43px;
-}
-
-.csgo-stat-box .last-round-box p.kd-value {
-    font-size: 21px;
-    line-height: 34px;
-    font-weight: 200;
-}
-
-.csgo-stat-box .last-round-box p.kd-value:before {
-    content: 'KD ';
-}
-
-.csgo-stat-box .last-round-box p.score-value,
-.csgo-stat-box .last-round-box p.stat-value {
-    line-height: 14px;
-    padding: 4px 0;
-    color: #8A9EA7;
-}
-
-.csgo-stat-box .last-round-box p.score-value span,
-.csgo-stat-box .last-round-box p.stat-value span {
-    display: inline-block;
-}
-
-.csgo-stat-box .last-round-box p.score-value span:after,
-.csgo-stat-box .last-round-box p.stat-value span:after {
-    content: '|';
-    display: inline-block;
-    padding: 0 10px;
-    opacity: .5;
-}
-
-.csgo-stat-box .last-round-box p.score-value span:last-child:after,
-.csgo-stat-box .last-round-box p.stat-value span:last-child:after {
-    content: none;
-}
-
-.csgo-stat-box .last-round-box img {
-    height: 86px;
-    position: absolute;
-    top: 0;
-    left: 10px;
-}
-
-.csgo-stat-box .cp {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    margin: 4px;
-    font-size: 12px;
-    line-height: 12px;
-    color: #8A9EA7;
-    transform: scale(.8);
-    opacity: .5;
-}
-
-@media (max-width: 400px) {
-    .csgo-stat-box .num-box li {
-        padding: 5px;
-        margin-right: 10px;
-    }
-}
-
-@media (max-width: 320px) {
-    .csgo-stat-box .num-box {
-        zoom: .95;
-    }
-}
-</style>
+template_html = """
+<meta content="width=device-width,user-scalable=0" name="viewport">
+<link rel="stylesheet" href="https://api.learningman.top/static/css/csgo.css" type="text/css">
 <div class="csgo-stat-box">
     <div class="head"><a class="user-link"><img
             src="{}">{}</a><img
             class="level" src="https://api.learningman.top/static/img/skillgroup{}.png"></div>
     <ul class="num-box">
         <li><span>{}</span><b>杀敌数</b></li>
-        <li><span>1</span><b>K/D</b></li>
-        <li><span>47.98%</span><b>胜率</b></li>
-        <li><span>43.86%</span><b>爆头率</b></li>
+        <li><span>{}</span><b>K/D</b></li>
+        <li><span>{}%</span><b>胜率</b></li>
+        <li><span>{}%</span><b>命中率</b></li>
+        <li><span>{}%</span><b>爆头率</b></li>
     </ul>
     <div class="last-round-box"><h2>最近一场比赛</h2>
-        <p class="kd-value">2.1</p>
-        <p class="score-value">负 0 / 1</p>
-        <p class="stat-value"><span>命中率 22.3%</span><span>MVP 0</span><span>击杀 46</span><span>死亡 22</span></p><img
-                src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgposLuoKhRfwOP3ejNN-M-Jloyeksj5Nr_Yg2Zu5MRjjeyPp9ik2AHi-0s4ZG_3ctOSc1BvNVzYrlG7wby60Z67uJrNwSdruCV05mGdwUL0cJQQGQ">
+        <p class="kd-value">{}</p>
+        <p class="score-value">{} {} / {}</p>
+        <p class="stat-value"><span>命中率 {}%</span><span>MVP {}</span><span>击杀 {}</span><span>死亡 {}</span></p><img
+                src="{}">
     </div>
 </div>
     """
