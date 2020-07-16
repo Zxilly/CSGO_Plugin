@@ -13,14 +13,8 @@
 <iframe class="csgo-stat-box" src="https://api.learningman.top/csgo/plugin?steamid={}&rankid={}" frameborder="0"></iframe>
 ```
 ## 效果
-<style> 
-.csgo-stat-box{ 
-    display:block; 
-    max-width:500px; 
-    height:220px; 
-    border-radius:4px; 
-} 
-</style> 
-<iframe class="csgo-stat-box" src="//api.learningman.top/csgo/plugin?steamid=76561198390775328&rankid=6" frameborder="0"></iframe> 
+
+![image.png](https://i.loli.net/2020/07/16/3usMUzDXmr4HIk2.png)
+
 ## 更多信息
 请访问[我的博客](https://learningman.top/archives/256)
