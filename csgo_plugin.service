@@ -1,0 +1,15 @@
+[Unit]
+Description=CSGO_Plugin
+Wants = network-online.target
+
+After = network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/env uvicorn api:app --port 8001
+WorkingDirectory=/www/wwwroot/csgo
+StandardOutput=syslog
+StandardError=inherit
+
+[Install]
+WantedBy=multi-user.target
