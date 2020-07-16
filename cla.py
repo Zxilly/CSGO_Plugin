@@ -9,7 +9,7 @@ class Player(object):
     def __init__(self, steamid):
         self.steamid = steamid
         # self.rankid = rankid
-        self.get_game_info()
+        # self.get_game_info()
         self.get_player_info()
 
     def get_game_info(self):
@@ -18,22 +18,22 @@ class Player(object):
                                    params=api1_info)
         data1 = json.loads(api1_object.content)
         self.total_kills = data1['playerstats']['stats'][0]['value']
-        self.total_head_kills = data1['playerstats']['stats'][0]['value']
+        self.total_head_kills = data1['playerstats']['stats'][25]['value']
         self.total_deaths = data1['playerstats']['stats'][1]['value']
-        self.total_wins_round = data1['playerstats']['stats'][6]['value']
+        self.total_wins_round = data1['playerstats']['stats'][5]['value']
         self.total_round = data1['playerstats']['stats'][46]['value']
         self.hits = data1['playerstats']['stats'][44]['value']
         self.fired = data1['playerstats']['stats'][45]['value']
         self.last_kill = data1['playerstats']['stats'][87]['value']
         self.last_death = data1['playerstats']['stats'][88]['value']
         self.last_mvp = data1['playerstats']['stats'][89]['value']
-        self.last_ct = data1['playerstats']['stats'][85]['value']
-        self.last_t = data1['playerstats']['stats'][84]['value']
-        last_win = data1['playerstats']['stats'][86]['value']
+        self.last_ct = data1['playerstats']['stats'][84]['value']
+        self.last_t = data1['playerstats']['stats'][83]['value']
+        last_win = data1['playerstats']['stats'][85]['value']
         if (self.last_ct > self.last_t):
-            win_status = 'ct'
+            self.win_status = 'ct'
         elif (self.last_ct < self.last_t):
-            win_status = 't'
+            self.win_status = 't'
         else:
             self.win_status = '平'
         if (last_win == self.last_ct):
