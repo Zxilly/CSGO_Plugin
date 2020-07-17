@@ -1,6 +1,3 @@
-import sys
-sys.path.append("..")
-
 from fastapi import FastAPI,Response
 from typing import Optional
 from cla import Player
