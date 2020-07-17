@@ -88,7 +88,7 @@ class Player(object):
     def __init__(self, steamid):
         self.steamid = steamid
         # self.rankid = rankid
-        # self.get_game_info()
+        self.get_game_info()
         self.get_player_info()
 
     def get_game_info(self):
