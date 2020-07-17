@@ -1,6 +1,6 @@
 # from PIL import Image,ImageDraw, ImageFont
 # from pri import *
-# import requests
+import requests
 # import json
 
 weapon_url_dict = {
@@ -60,3 +60,11 @@ template_html = """<meta content="width=device-width,user-scalable=0" name="view
     </div>
 </div>
     """
+def get_weapon_png():
+    for key in weapon_url_dict.keys():
+        with open('assets/weapons/{}.png'.format(key),'wb') as f:
+            a = requests.get(weapon_url_dict[key])
+            f.write(a.content)
+
+if __name__ == '__main__':
+    get_weapon_png()
