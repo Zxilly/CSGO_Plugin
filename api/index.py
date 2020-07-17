@@ -169,7 +169,7 @@ def write_cache(path, content):
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/api")
 async def entry(steamid:str,rankid:int):
     a = Player(steamid)
     output = cache(a,rankid)
