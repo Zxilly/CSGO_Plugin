@@ -172,5 +172,5 @@ app = FastAPI()
 @app.get("/api")
 async def entry(steamid:str,rankid:int):
     a = Player(steamid)
-    output = cache(a,rankid)
+    output = render(player=a,rankid=rankid)
     return Response(content=output,media_type='text/html')
