@@ -1,6 +1,6 @@
 import json
 from datetime import datetime
-from PIL import Image, ImageDraw, ImageFont
+# from PIL import Image, ImageDraw, ImageFont
 
 from data import *
 
@@ -25,7 +25,7 @@ def render(player, rankid):
     # print(output)
     return output
 
-
+"""
 def pic_render(player, rankid):
     kd = format(player.total_kills / player.total_deaths, '.2f')
     win_rate = format(player.total_wins_round / player.total_round * 100, '.2f')
@@ -36,7 +36,7 @@ def pic_render(player, rankid):
     fav_hit_rate = format(player.last_favweapon_hits / player.last_favweapon_shots * 100, '.2f')
 
     base_pic = Image.new('RGB',(500,220),'#2F3545')
-
+"""
 
 # @player_info
 #   generate_time
