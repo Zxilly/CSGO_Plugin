@@ -111,6 +111,8 @@ class Player(object):
         last_win = data1['playerstats']['stats'][85]['value']
         if (last_win == 15):
             self.win_status = '平'
+            self.last_t = 15
+            self.last_ct = 15
         else:
             if (self.last_ct > self.last_t):
                 self.win_status = 'ct'
