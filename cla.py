@@ -30,20 +30,21 @@ class Player(object):
         self.last_ct = data1['playerstats']['stats'][84]['value']
         self.last_t = data1['playerstats']['stats'][83]['value']
         last_win = data1['playerstats']['stats'][85]['value']
-        if (self.last_ct > self.last_t):
-            self.win_status = 'ct'
-        elif (self.last_ct < self.last_t):
-            self.win_status = 't'
-        else:
+        if(last_win==15):
             self.win_status = '平'
-        if (last_win == self.last_ct):
-            player_role = 'ct'
         else:
-            player_role = 't'
-        if (self.win_status == player_role and self.win_status != '平'):
-            self.win_status = '胜'
-        else:
-            self.win_status = '负'
+            if (self.last_ct > self.last_t):
+                self.win_status = 'ct'
+            elif (self.last_ct < self.last_t):
+                self.win_status = 't'
+            if (last_win == self.last_ct):
+                player_role = 'ct'
+            else:
+                player_role = 't'
+            if (self.win_status == player_role):
+                self.win_status = '胜'
+            else:
+                self.win_status = '负'
         self.last_favweapon_id = data1['playerstats']['stats'][90]['value']
         self.last_favweapon_shots = data1['playerstats']['stats'][91]['value']
         self.last_favweapon_hits = data1['playerstats']['stats'][92]['value']
