@@ -1,7 +1,6 @@
 from fastapi import FastAPI,Response
 from typing import Optional
 from cla import Player
-from pri import user_code
 from function import cache
 
 app = FastAPI()
