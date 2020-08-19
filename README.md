@@ -10,7 +10,7 @@
     border-radius:4px; 
 } 
 </style> 
-<iframe class="csgo-stat-box" src="https://api.learningman.top/csgo/plugin?steamid={}&rankid={}" frameborder="0"></iframe>
+<iframe class="csgo-stat-box" src="https://csgo.plugin.learningman.top/csgo/plugin?steamid={}&rankid={}" frameborder="0"></iframe>
 ```
 ## 效果
 
