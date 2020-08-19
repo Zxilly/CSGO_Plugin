@@ -39,12 +39,12 @@ weapon_url_dict = {
     41: "https://steamcdn-a.akamaihd.net/apps/730/icons/econ/weapons/base_weapons/weapon_knife.a07b900d79ea768eae1a217a2839c5727f760396.png",
 }
 
-template_html = """<meta content="width=device-width,user-scalable=0" name="viewport">
-<link rel="stylesheet" href="https://api.learningman.top/static/css/csgo.css" type="text/css">
+template_html = """<meta content="width=device-width,user-scalable=0" name="viewport"/>
+<link rel="stylesheet" href="https://api.learningman.top/static/css/csgo.css" type="text/css"/>
 <div class="csgo-stat-box">
     <div class="head"><a class="user-link"><img
-            src="{}">{}</a><img
-            class="level" src="https://api.learningman.top/static/img/skillgroup{}.png"></div>
+            src="{}"/>{}</a><img
+            class="level" src="https://api.learningman.top/static/img/skillgroup{}.png"/></div>
     <ul class="num-box">
         <li><span>{}</span><b>杀敌数</b></li>
         <li><span>{}</span><b>K/D</b></li>
@@ -56,7 +56,7 @@ template_html = """<meta content="width=device-width,user-scalable=0" name="view
         <p class="kd-value">{}</p>
         <p class="score-value">{} {} / {}</p>
         <p class="stat-value"><span>命中率 {}%</span><span>MVP {}</span><span>击杀 {}</span><span>死亡 {}</span></p><img
-                src="{}">
+                src="{}"/>
     </div>
 </div>
     """
