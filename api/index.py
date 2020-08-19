@@ -63,11 +63,11 @@ weapon_url_dict = {
 }
 
 template_html = """<meta content="width=device-width,user-scalable=0" name="viewport">
-<link rel="stylesheet" href="https://api.learningman.top/static/css/csgo.css" type="text/css">
+<link rel="stylesheet" href="https://api.learningman.top/static/css/csgo.css" type="text/css"/>
 <div class="csgo-stat-box">
     <div class="head"><a class="user-link"><img
-            src="{}">{}</a><img
-            class="level" src="https://api.learningman.top/static/img/skillgroup{}.png"></div>
+            src="{}"/>{}</a><img
+            class="level" src="https://api.learningman.top/static/img/skillgroup{}.png"/></div>
     <ul class="num-box">
         <li><span>{}</span><b>杀敌数</b></li>
         <li><span>{}</span><b>K/D</b></li>
@@ -79,7 +79,7 @@ template_html = """<meta content="width=device-width,user-scalable=0" name="view
         <p class="kd-value">{}</p>
         <p class="score-value">{} {} / {}</p>
         <p class="stat-value"><span>命中率 {}%</span><span>MVP {}</span><span>击杀 {}</span><span>死亡 {}</span></p><img
-                src="{}">
+                src="{}"/>
     </div>
 </div>
     """
@@ -173,7 +173,15 @@ def write_cache(path, content):
 app = FastAPI()
 
 @app.get("/api")
-async def entry(steamid:str,rankid:int):
+async def entry(steamid:str,rankid:int,svg:bool=False):
     a = Player(steamid)
     output = render(player=a,rankid=rankid)
-    return Response(content=output,media_type='text/html')
+    if not svg:
+        return Response(content=output, media_type='text/html')
+    else:
+        rep = """<svg width="750" height="360" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <title>CSGO Plugin</title>
+      <foreignObject width="500" height="220">
+      <body xmlns="http://www.w3.org/1999/xhtml">{}</body></foreignObject>
+    </svg>""".format(output)
+        return Response(content=rep, media_type='image/svg+xml')
