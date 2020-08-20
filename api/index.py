@@ -8,7 +8,7 @@ api_key = "A41CB32704D5547F3F4C23905FFEDEAB"
 
 def img2base64(inputInfo,rank=False):
     if rank:
-        with open('./page/img/skillgroup'+inputInfo+'.png','rb') as f:
+        with open('./page/img/skillgroup'+str(inputInfo)+'.png','rb') as f:
             b64data = base64.b64encode(f.read())
             return b64data
     else:
