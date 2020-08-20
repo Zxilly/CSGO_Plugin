@@ -10,10 +10,10 @@ def img2base64(inputInfo,rank=False):
     if rank:
         with open('./page/img/skillgroup'+str(inputInfo)+'.png','rb') as f:
             b64data = base64.b64encode(f.read())
-            return b64data
+            return b64data.decode()
     else:
         f = requests.get(url=inputInfo).content
-        return base64.b64encode(f)
+        return base64.b64encode(f).decode()
 
 def render(player, rankid,svg=False):
     kd = format(player.total_kills / player.total_deaths, '.2f')
@@ -283,10 +283,10 @@ template_html_svg = """<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
             <div class="csgo-stat-box">
                 <div class="head">
                     <a class="user-link"><img
-                            src="{}"/>{}
+                            src="data:image/jpeg;base64,{}"/>{}
                     </a>
                     <img
-                            class="level" src="{}"/>
+                            class="level" src="data:image/png;base64,{}"/>
                 </div>
                 <ul class="num-box">
                     <li>
@@ -321,7 +321,7 @@ template_html_svg = """<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <span>死亡 {}</span>
                     </p>
                     <img
-                            src="{}"/>
+                            src="data:image/png;base64,{}"/>
                 </div>
             </div>
         </div>
