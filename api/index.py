@@ -119,87 +119,87 @@ template_html_svg = """<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
         <div xmlns="http://www.w3.org/1999/xhtml" style="margin:0;height:100%;width:100%">
             <meta content="width=device-width,user-scalable=0" name="viewport"/>
             <style>
-                div {
+                div {{
                 background: #2F3545;
                 color: #FFF;
                 font: 12px sans-serif;
-                }
+                }}
 
                 body,
                 div,
                 h2,
-                p {
+                p {{
                 margin: 0;
-                }
+                }}
 
-                .csgo-stat-box {
+                .csgo-stat-box {{
                 overflow: hidden;
-                }
+                }}
 
-                .csgo-stat-box .head {
+                .csgo-stat-box .head {{
                 padding: 10px;
-                }
+                }}
 
-                .csgo-stat-box .head .user-link {
+                .csgo-stat-box .head .user-link {{
                 font-size: 24px;
                 line-height: 36px;
-                }
+                }}
 
-                .csgo-stat-box .head .user-link img {
+                .csgo-stat-box .head .user-link img {{
                 width: 36px;
                 height: 36px;
                 border-radius: 2px;
                 vertical-align: top;
                 margin-right: 10px;
-                }
+                }}
 
-                .csgo-stat-box .head .level {
+                .csgo-stat-box .head .level {{
                 float: right;
                 height: 36px;
-                }
+                }}
 
-                .csgo-stat-box .num-box {
+                .csgo-stat-box .num-box {{
                 margin: 0 -30px 0 0;
                 list-style-type: none;
                 padding: 5px 0 5px 5px;
                 overflow: hidden;
                 background: #111;
                 text-shadow: 0 1px 0 #000;
-                }
+                }}
 
-                .csgo-stat-box .num-box li {
+                .csgo-stat-box .num-box li {{
                 float: left;
                 padding: 5px 10px;
                 margin-right: 10px;
-                }
+                }}
 
-                .csgo-stat-box .num-box li:last-child {
+                .csgo-stat-box .num-box li:last-child {{
                 margin-right: 0;
                 padding-right: 0;
-                }
+                }}
 
-                .csgo-stat-box .num-box li span {
+                .csgo-stat-box .num-box li span {{
                 display: block;
                 font-size: 24px;
                 line-height: 28px;
                 font-weight: 100;
-                }
+                }}
 
-                .csgo-stat-box .num-box li b {
+                .csgo-stat-box .num-box li b {{
                 display: block;
                 font-style: 12px;
                 line-height: 18px;
                 font-weight: 200;
                 color: #8A9EA7;
-                }
+                }}
 
-                .csgo-stat-box .last-round-box {
+                .csgo-stat-box .last-round-box {{
                 position: relative;
                 text-align: right;
                 padding: 10px 17px;
-                }
+                }}
 
-                .csgo-stat-box .last-round-box h2 {
+                .csgo-stat-box .last-round-box h2 {{
                 font-size: 12px;
                 line-height: 22px;
                 font-weight: 200;
@@ -211,51 +211,51 @@ template_html_svg = """<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                 padding: 0 7px;
                 border-radius: 2px;
                 margin-left: -43px;
-                }
+                }}
 
-                .csgo-stat-box .last-round-box p.kd-value {
+                .csgo-stat-box .last-round-box p.kd-value {{
                 font-size: 21px;
                 line-height: 34px;
                 font-weight: 200;
-                }
+                }}
 
-                .csgo-stat-box .last-round-box p.kd-value:before {
+                .csgo-stat-box .last-round-box p.kd-value:before {{
                 content: 'KD ';
-                }
+                }}
 
                 .csgo-stat-box .last-round-box p.score-value,
-                .csgo-stat-box .last-round-box p.stat-value {
+                .csgo-stat-box .last-round-box p.stat-value {{
                 line-height: 14px;
                 padding: 4px 0;
                 color: #8A9EA7;
-                }
+                }}
 
                 .csgo-stat-box .last-round-box p.score-value span,
-                .csgo-stat-box .last-round-box p.stat-value span {
+                .csgo-stat-box .last-round-box p.stat-value span {{
                 display: inline-block;
-                }
+                }}
 
                 .csgo-stat-box .last-round-box p.score-value span:after,
-                .csgo-stat-box .last-round-box p.stat-value span:after {
+                .csgo-stat-box .last-round-box p.stat-value span:after {{
                 content: '|';
                 display: inline-block;
                 padding: 0 10px;
                 opacity: .5;
-                }
+                }}
 
                 .csgo-stat-box .last-round-box p.score-value span:last-child:after,
-                .csgo-stat-box .last-round-box p.stat-value span:last-child:after {
+                .csgo-stat-box .last-round-box p.stat-value span:last-child:after {{
                 content: none;
-                }
+                }}
 
-                .csgo-stat-box .last-round-box img {
+                .csgo-stat-box .last-round-box img {{
                 height: 86px;
                 position: absolute;
                 top: 0;
                 left: 10px;
-                }
+                }}
 
-                .csgo-stat-box .cp {
+                .csgo-stat-box .cp {{
                 position: absolute;
                 left: 0;
                 bottom: 0;
@@ -265,20 +265,20 @@ template_html_svg = """<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
                 color: #8A9EA7;
                 transform: scale(.8);
                 opacity: .5;
-                }
+                }}
 
-                @media (max-width: 400px) {
-                .csgo-stat-box .num-box li {
+                @media (max-width: 400px) {{
+                .csgo-stat-box .num-box li {{
                 padding: 5px;
                 margin-right: 10px;
-                }
-                }
+                }}
+                }}
 
-                @media (max-width: 320px) {
-                .csgo-stat-box .num-box {
+                @media (max-width: 320px) {{
+                .csgo-stat-box .num-box {{
                 zoom: .95;
-                }
-                }
+                }}
+                }}
             </style>
             <div class="csgo-stat-box">
                 <div class="head">
