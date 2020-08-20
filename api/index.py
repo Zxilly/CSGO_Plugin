@@ -182,6 +182,6 @@ async def entry(steamid:str,rankid:int,svg:bool=False):
         rep = """<svg width="500" height="220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <title>CSGO Plugin</title>
       <foreignObject width="500" height="220">
-      <div xmlns="http://www.w3.org/1999/xhtml"><iframe class="csgo-stat-box" frameborder="0">{}</iframe></div></foreignObject>
+      <iframe class="csgo-stat-box" frameborder="0" xmlns="http://www.w3.org/1999/xhtml">{}</iframe></foreignObject>
     </svg>""".format(output)
         return Response(content=rep, media_type='image/svg+xml')
