@@ -174,16 +174,16 @@ app = FastAPI()
 
 @app.get("/api")
 async def entry(steamid:str,rankid:int,svg:bool=False):
-    a = Player(steamid)
-    output = render(player=a,rankid=rankid)
     if not svg:
+        a = Player(steamid)
+        output = render(player=a, rankid=rankid)
         return Response(content=output, media_type='text/html')
     else:
         rep = """<svg width="500" height="220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <title>CSGO Plugin</title>
       <foreignObject width="500" height="220">
-      <iframe class="csgo-stat-box" frameborder="0" xmlns="http://www.w3.org/1999/xhtml" srcdoc="{}">
+      <iframe class="csgo-stat-box" frameborder="0" xmlns="http://www.w3.org/1999/xhtml" src="https://csgo.plugin.learningman.top/api?steamid={}&rankid={}">
       </iframe>
       </foreignObject>
-    </svg>""".format(output)
+    </svg>""".format(steamid,rankid)
         return Response(content=rep, media_type='image/svg+xml')
