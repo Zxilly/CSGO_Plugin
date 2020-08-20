@@ -113,7 +113,7 @@ template_html = """<meta content="width=device-width,user-scalable=0" name="view
 </div>
     """
 
-template_html_svg = """<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+template_html_svg = """<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="500px" height="220px">
     <title>CSGO Plugin</title>
     <foreignObject width="500" height="220">
         <div xmlns="http://www.w3.org/1999/xhtml" style="margin:0;height:100%;width:100%">
