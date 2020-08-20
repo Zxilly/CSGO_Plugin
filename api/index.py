@@ -182,8 +182,10 @@ async def entry(steamid:str,rankid:int,svg:bool=False):
         rep = """<svg width="500" height="220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <title>CSGO Plugin</title>
       <foreignObject width="500" height="220">
-      <iframe class="csgo-stat-box" frameborder="0" xmlns="http://www.w3.org/1999/xhtml" src="https://csgo.plugin.learningman.top/api?steamid={}&rankid={}">
+      <body xmlns="http://www.w3.org/1999/xhtml">
+      <iframe class="csgo-stat-box" frameborder="0" src="https://csgo.plugin.learningman.top/api?steamid={}&rankid={}">
       </iframe>
+      </body>
       </foreignObject>
     </svg>""".format(steamid,rankid)
         return Response(content=rep, media_type='image/svg+xml')
