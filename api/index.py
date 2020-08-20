@@ -183,7 +183,7 @@ async def entry(steamid:str,rankid:int,svg:bool=False):
       <title>CSGO Plugin</title>
       <foreignObject width="500" height="220">
       <body xmlns="http://www.w3.org/1999/xhtml" style="margin:0">
-      <iframe class="csgo-stat-box" frameborder="0" seamless src="https://csgo.plugin.learningman.top/api?steamid={}&amp;rankid={}"/>
+      <iframe class="csgo-stat-box" frameborder="0" src="https://csgo.plugin.learningman.top/api?steamid={}&amp;rankid={}"/>
       </body>
       </foreignObject>
     </svg>""".format(steamid,rankid)
