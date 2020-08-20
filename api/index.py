@@ -1,12 +1,21 @@
-from fastapi import FastAPI,Response
-from typing import Optional
 import json
-import requests
 from datetime import datetime
+import base64
+import requests
+from fastapi import FastAPI, Response
 
 api_key = "A41CB32704D5547F3F4C23905FFEDEAB"
 
-def render(player, rankid):
+def img2base64(inputInfo,rank=False):
+    if rank:
+        with open('./page/img/skillgroup'+inputInfo+'.png','rb') as f:
+            b64data = base64.b64encode(f.read())
+            return b64data
+    else:
+        f = requests.get(url=inputInfo).content
+        return base64.b64encode(f)
+
+def render(player, rankid,svg=False):
     kd = format(player.total_kills / player.total_deaths, '.2f')
     win_rate = format(player.total_wins_round / player.total_round * 100, '.2f')
     # print(player.total_wins_round,player.total_round)
@@ -18,13 +27,33 @@ def render(player, rankid):
     # print(player.last_favweapon_id)
     # print(player.last_favweapon_hits)
 
-    output = template_html.format(player.avatar_url, player.player_name, rankid, player.total_kills, kd, win_rate,
+    if not svg:
+        output = template_html.format(player.avatar_url, player.player_name, rankid, player.total_kills, kd, win_rate,
                                   hit_rate, headshot_rate, last_kd, player.win_status, player.last_t, player.last_ct,
                                   fav_hit_rate, player.last_mvp, player.last_kill, player.last_death,
                                   weapon_url_dict[player.last_favweapon_id])
 
+    else:
+        output = template_html_svg.format(img2base64(player.avatar_url),
+                                          player.player_name,
+                                          img2base64(rankid,rank=True),
+                                          player.total_kills,
+                                          kd,
+                                          win_rate,
+                                          hit_rate,
+                                          headshot_rate,
+                                          last_kd,
+                                          player.win_status,
+                                          player.last_t,
+                                          player.last_ct,
+                                          fav_hit_rate,
+                                          player.last_mvp,
+                                          player.last_kill,
+                                          player.last_death,
+                                          img2base64(weapon_url_dict[player.last_favweapon_id]))
     # print(output)
     return output
+
 
 weapon_url_dict = {
     1: "https://steamcdn-a.akamaihd.net/apps/730/icons/econ/weapons/base_weapons/weapon_deagle.29e8f0d7d0be5e737d4f663ee8b394b5c9e00bdd.png",
@@ -82,6 +111,222 @@ template_html = """<meta content="width=device-width,user-scalable=0" name="view
                 src="{}"/>
     </div>
 </div>
+    """
+
+template_html_svg = """<svg version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <title>CSGO Plugin</title>
+    <foreignObject width="500" height="220">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="margin:0;height:100%;width:100%">
+            <meta content="width=device-width,user-scalable=0" name="viewport"/>
+            <style>
+                div {
+                background: #2F3545;
+                color: #FFF;
+                font: 12px sans-serif;
+                }
+
+                body,
+                div,
+                h2,
+                p {
+                margin: 0;
+                }
+
+                .csgo-stat-box {
+                overflow: hidden;
+                }
+
+                .csgo-stat-box .head {
+                padding: 10px;
+                }
+
+                .csgo-stat-box .head .user-link {
+                font-size: 24px;
+                line-height: 36px;
+                }
+
+                .csgo-stat-box .head .user-link img {
+                width: 36px;
+                height: 36px;
+                border-radius: 2px;
+                vertical-align: top;
+                margin-right: 10px;
+                }
+
+                .csgo-stat-box .head .level {
+                float: right;
+                height: 36px;
+                }
+
+                .csgo-stat-box .num-box {
+                margin: 0 -30px 0 0;
+                list-style-type: none;
+                padding: 5px 0 5px 5px;
+                overflow: hidden;
+                background: #111;
+                text-shadow: 0 1px 0 #000;
+                }
+
+                .csgo-stat-box .num-box li {
+                float: left;
+                padding: 5px 10px;
+                margin-right: 10px;
+                }
+
+                .csgo-stat-box .num-box li:last-child {
+                margin-right: 0;
+                padding-right: 0;
+                }
+
+                .csgo-stat-box .num-box li span {
+                display: block;
+                font-size: 24px;
+                line-height: 28px;
+                font-weight: 100;
+                }
+
+                .csgo-stat-box .num-box li b {
+                display: block;
+                font-style: 12px;
+                line-height: 18px;
+                font-weight: 200;
+                color: #8A9EA7;
+                }
+
+                .csgo-stat-box .last-round-box {
+                position: relative;
+                text-align: right;
+                padding: 10px 17px;
+                }
+
+                .csgo-stat-box .last-round-box h2 {
+                font-size: 12px;
+                line-height: 22px;
+                font-weight: 200;
+                color: #8A9EA7;
+                background: #111;
+                position: absolute;
+                top: 15px;
+                left: 50%;
+                padding: 0 7px;
+                border-radius: 2px;
+                margin-left: -43px;
+                }
+
+                .csgo-stat-box .last-round-box p.kd-value {
+                font-size: 21px;
+                line-height: 34px;
+                font-weight: 200;
+                }
+
+                .csgo-stat-box .last-round-box p.kd-value:before {
+                content: 'KD ';
+                }
+
+                .csgo-stat-box .last-round-box p.score-value,
+                .csgo-stat-box .last-round-box p.stat-value {
+                line-height: 14px;
+                padding: 4px 0;
+                color: #8A9EA7;
+                }
+
+                .csgo-stat-box .last-round-box p.score-value span,
+                .csgo-stat-box .last-round-box p.stat-value span {
+                display: inline-block;
+                }
+
+                .csgo-stat-box .last-round-box p.score-value span:after,
+                .csgo-stat-box .last-round-box p.stat-value span:after {
+                content: '|';
+                display: inline-block;
+                padding: 0 10px;
+                opacity: .5;
+                }
+
+                .csgo-stat-box .last-round-box p.score-value span:last-child:after,
+                .csgo-stat-box .last-round-box p.stat-value span:last-child:after {
+                content: none;
+                }
+
+                .csgo-stat-box .last-round-box img {
+                height: 86px;
+                position: absolute;
+                top: 0;
+                left: 10px;
+                }
+
+                .csgo-stat-box .cp {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                margin: 4px;
+                font-size: 12px;
+                line-height: 12px;
+                color: #8A9EA7;
+                transform: scale(.8);
+                opacity: .5;
+                }
+
+                @media (max-width: 400px) {
+                .csgo-stat-box .num-box li {
+                padding: 5px;
+                margin-right: 10px;
+                }
+                }
+
+                @media (max-width: 320px) {
+                .csgo-stat-box .num-box {
+                zoom: .95;
+                }
+                }
+            </style>
+            <div class="csgo-stat-box">
+                <div class="head">
+                    <a class="user-link"><img
+                            src="{}"/>{}
+                    </a>
+                    <img
+                            class="level" src="{}"/>
+                </div>
+                <ul class="num-box">
+                    <li>
+                        <span>{}</span>
+                        <b>杀敌数</b>
+                    </li>
+                    <li>
+                        <span>{}</span>
+                        <b>K/D</b>
+                    </li>
+                    <li>
+                        <span>{}%</span>
+                        <b>胜率</b>
+                    </li>
+                    <li>
+                        <span>{}%</span>
+                        <b>命中率</b>
+                    </li>
+                    <li>
+                        <span>{}%</span>
+                        <b>爆头率</b>
+                    </li>
+                </ul>
+                <div class="last-round-box">
+                    <h2>最近一场比赛</h2>
+                    <p class="kd-value">{}</p>
+                    <p class="score-value">{} {} / {}</p>
+                    <p class="stat-value">
+                        <span>命中率 {}%</span>
+                        <span>MVP {}</span>
+                        <span>击杀 {}</span>
+                        <span>死亡 {}</span>
+                    </p>
+                    <img
+                            src="{}"/>
+                </div>
+            </div>
+        </div>
+    </foreignObject>
+</svg>
     """
 
 class Player(object):
@@ -170,21 +415,15 @@ def write_cache(path, content):
         f.write(json.dumps(cache_content))
 
 
+
 app = FastAPI()
 
 @app.get("/api")
 async def entry(steamid:str,rankid:int,svg:bool=False):
+    a = Player(steamid)
     if not svg:
-        a = Player(steamid)
         output = render(player=a, rankid=rankid)
         return Response(content=output, media_type='text/html')
     else:
-        rep = """<svg width="500" height="220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <title>CSGO Plugin</title>
-      <foreignObject width="500" height="220">
-      <div xmlns="http://www.w3.org/1999/xhtml" style="margin:0;height:100%;width:100%">
-      <iframe class="csgo-stat-box" frameborder="0" src="https://csgo.plugin.learningman.top/api?steamid={}&amp;rankid={}" style="width:100%;height:100%"/>
-      </div>
-      </foreignObject>
-    </svg>""".format(steamid,rankid)
+        rep = render(player=a,rankid=rankid,svg=True)
         return Response(content=rep, media_type='image/svg+xml')
