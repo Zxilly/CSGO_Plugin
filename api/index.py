@@ -179,7 +179,7 @@ async def entry(steamid:str,rankid:int,svg:bool=False):
     if not svg:
         return Response(content=output, media_type='text/html')
     else:
-        rep = """<svg width="750" height="360" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        rep = """<svg width="500" height="220" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <title>CSGO Plugin</title>
       <foreignObject width="500" height="220">
       <div xmlns="http://www.w3.org/1999/xhtml">{}</div></foreignObject>
