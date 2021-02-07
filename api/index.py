@@ -10,11 +10,11 @@ rand = "A41CB32704D5547F3F4C23905FFEDEAB"
 
 def img2base64(inputInfo, rank=False, weapon=False):
     if rank:
-        with open('../page/img/skillgroup' + str(inputInfo) + '.png', 'rb') as f:
+        with open('./page/img/skillgroup' + str(inputInfo) + '.png', 'rb') as f:
             b64data = base64.b64encode(f.read())
             return b64data.decode()
     elif weapon:
-        with open(f'../page/base64/{inputInfo}', 'rb') as f:
+        with open(f'./page/base64/{inputInfo}', 'rb') as f:
             a = f.read()
         return a.decode()
     else:
