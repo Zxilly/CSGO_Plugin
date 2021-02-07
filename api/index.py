@@ -4,18 +4,21 @@ import base64
 import requests
 from fastapi import FastAPI, Response
 
-api_key = "A41CB32704D5547F3F4C23905FFEDEAB"
+rand = "A41CB32704D5547F3F4C23905FFEDEAB"
 
-def img2base64(inputInfo,rank=False):
+
+def img2base64(inputInfo, rank=False):
     if rank:
-        with open('./page/img/skillgroup'+str(inputInfo)+'.png','rb') as f:
+        with open('./page/img/skillgroup' + str(inputInfo) + '.png', 'rb') as f:
             b64data = base64.b64encode(f.read())
             return b64data.decode()
     else:
-        f = requests.get(url=inputInfo).content
-        return base64.b64encode(f).decode()
+        with open(f'./page/base64/{inputInfo}', 'rb') as f:
+            a = f.read()
+        return a
 
-def render(player, rankid,svg=False):
+
+def render(player, rankid, svg=False):
     kd = format(player.total_kills / player.total_deaths, '.2f')
     win_rate = format(player.total_wins_round / player.total_round * 100, '.2f')
     # print(player.total_wins_round,player.total_round)
@@ -29,14 +32,15 @@ def render(player, rankid,svg=False):
 
     if not svg:
         output = template_html.format(player.avatar_url, player.player_name, rankid, player.total_kills, kd, win_rate,
-                                  hit_rate, headshot_rate, last_kd, player.win_status, player.last_t, player.last_ct,
-                                  fav_hit_rate, player.last_mvp, player.last_kill, player.last_death,
-                                  weapon_url_dict[player.last_favweapon_id])
+                                      hit_rate, headshot_rate, last_kd, player.win_status, player.last_t,
+                                      player.last_ct,
+                                      fav_hit_rate, player.last_mvp, player.last_kill, player.last_death,
+                                      weapon_url_dict[player.last_favweapon_id])
 
     else:
         output = template_html_svg.format(img2base64(player.avatar_url),
                                           player.player_name,
-                                          img2base64(rankid,rank=True),
+                                          img2base64(rankid, rank=True),
                                           player.total_kills,
                                           kd,
                                           win_rate,
@@ -329,6 +333,7 @@ template_html_svg = """<svg version="1.1" xmlns="http://www.w3.org/2000/svg" wid
 </svg>
     """
 
+
 class Player(object):
     def __init__(self, steamid):
         self.steamid = steamid
@@ -337,7 +342,7 @@ class Player(object):
         self.get_player_info()
 
     def get_game_info(self):
-        api1_info = {"appid": 730, "key": api_key, "steamid": self.steamid}
+        api1_info = {"appid": 730, "key": rand, "steamid": self.steamid}
         api1_object = requests.get("https://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/",
                                    params=api1_info)
         data1 = json.loads(api1_object.content)
@@ -381,7 +386,7 @@ class Player(object):
         #    num += 1
 
     def get_player_info(self):
-        api2_info = {"key": api_key, "steamids": self.steamid}
+        api2_info = {"key": rand, "steamids": self.steamid}
         api2_object = requests.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",
                                    params=api2_info)
         data2 = json.loads(api2_object.content)
@@ -415,15 +420,15 @@ def write_cache(path, content):
         f.write(json.dumps(cache_content))
 
 
-
 app = FastAPI()
 
+
 @app.get("/api")
-async def entry(steamid:str,rankid:int,svg:bool=False):
+async def entry(steamid: str, rankid: int, svg: bool = False):
     a = Player(steamid)
     if not svg:
         output = render(player=a, rankid=rankid)
         return Response(content=output, media_type='text/html')
     else:
-        rep = render(player=a,rankid=rankid,svg=True)
+        rep = render(player=a, rankid=rankid, svg=True)
         return Response(content=rep, media_type='image/svg+xml')
