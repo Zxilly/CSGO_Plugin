@@ -16,7 +16,7 @@ def img2base64(inputInfo, rank=False, weapon=False):
     elif weapon:
         with open(f'./page/base64/{inputInfo}', 'rb') as f:
             a = f.read()
-        return a
+        return a.decode()
     else:
         return base64.b64encode(requests.get(inputInfo).content).decode()
 
