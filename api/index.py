@@ -352,7 +352,7 @@ class Player(object):
         alist = data1['playerstats']['stats']
         self.total_kills = deepTraverse(alist, 'total_kills')
         self.total_head_kills = deepTraverse(alist, 'total_kills_headshot')
-        self.total_deaths = deepTraverse(alist, 'total_wins')
+        self.total_deaths = deepTraverse(alist, 'total_deaths')
         self.total_wins_round = deepTraverse(alist, 'total_wins')
         self.total_round = deepTraverse(alist, 'total_rounds_played')
         self.hits = deepTraverse(alist, 'last_match_favweapon_hits')
