@@ -54,7 +54,7 @@ def render(player, rankid, svg=False):
                                           player.last_mvp,
                                           player.last_kill,
                                           player.last_death,
-                                          img2base64(weapon_url_dict[player.last_favweapon_id]))
+                                          img2base64(player.last_favweapon_id))
     # print(output)
     return output
 
