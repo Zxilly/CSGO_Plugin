@@ -1,21 +1,24 @@
+import base64
 import json
 from datetime import datetime
-import base64
+
 import requests
 from fastapi import FastAPI, Response
 
 rand = "A41CB32704D5547F3F4C23905FFEDEAB"
 
 
-def img2base64(inputInfo, rank=False):
+def img2base64(inputInfo, rank=False, weapon=False):
     if rank:
         with open('./page/img/skillgroup' + str(inputInfo) + '.png', 'rb') as f:
             b64data = base64.b64encode(f.read())
             return b64data.decode()
-    else:
+    elif weapon:
         with open(f'./page/base64/{inputInfo}', 'rb') as f:
             a = f.read()
         return a
+    else:
+        return base64.b64encode(requests.get(inputInfo).content).decode()
 
 
 def render(player, rankid, svg=False):
@@ -54,7 +57,7 @@ def render(player, rankid, svg=False):
                                           player.last_mvp,
                                           player.last_kill,
                                           player.last_death,
-                                          img2base64(player.last_favweapon_id))
+                                          img2base64(player.last_favweapon_id,weapon=True))
     # print(output)
     return output
 
