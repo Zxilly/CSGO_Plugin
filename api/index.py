@@ -1,9 +1,7 @@
 import base64
 import json
-from datetime import datetime
 
 import requests
-import uvicorn
 from fastapi import FastAPI, Response
 
 rand = "A41CB32704D5547F3F4C23905FFEDEAB"
