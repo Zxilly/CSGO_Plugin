@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 
 import requests
+import uvicorn
 from fastapi import FastAPI, Response
 
 rand = "A41CB32704D5547F3F4C23905FFEDEAB"
@@ -394,10 +395,10 @@ class Player(object):
         api2_object = requests.get("https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",
                                    params=api2_info)
         data2 = json.loads(api2_object.content)
-        # print(data2)
+        ## print(data2)
         self.player_name = data2['response']['players'][0]['personaname']
         self.avatar_url = data2['response']['players'][0]['avatarfull']
-        self.logoff_time = data2['response']['players'][0]['lastlogoff']
+        # self.logoff_time = data2['response']['players'][0]['lastlogoff']
 
 
 def deepTraverse(alist, key):
@@ -405,30 +406,6 @@ def deepTraverse(alist, key):
         if one['name'] == key:
             return one['value']
     raise Exception("Not Found")
-
-
-def cache(player, rankid):
-    steamid = player.steamid
-    cache_path = './cache/{}.{}.json'.format(steamid, rankid)
-    try:
-        with open(cache_path, 'r+') as f:
-            player_info = json.loads(f.read())
-            if player_info['generate_time'] > player.logoff_time:
-                return player_info['page_content']
-            else:
-                raise Exception('CacheExpiredError')
-    except:
-        player.get_game_info()
-        render_content = render(player, rankid)
-        write_cache(cache_path, render_content)
-        return render_content
-
-
-def write_cache(path, content):
-    time_now = datetime.timestamp(datetime.utcnow())
-    cache_content = {'generate_time': time_now, 'page_content': content}
-    with open(path, 'w+') as f:
-        f.write(json.dumps(cache_content))
 
 
 app = FastAPI()
